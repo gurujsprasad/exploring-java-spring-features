@@ -1,6 +1,7 @@
 package com.spring.application.springapplication;
 
 import java.util.List;
+import java.util.Map;
 
 public class Person {
 	//constructor arguments - DI
@@ -19,15 +20,25 @@ public class Person {
 	//list of beans
 	private List<JobExperience> jobs; 
 	
+	//setting map as property
+	private Map<String,String> mapContactSource;
 	
+	
+	
+	public void setMapContactSource(Map<String, String> mapContactSource) {
+		this.mapContactSource = mapContactSource;
+	}
+
 	public void setJobs(List<JobExperience> jobs) {
 		this.jobs = jobs;
 	}
 
+	
+
 	@Override
 	public String toString() {
 		return "Person [id=" + id + ", name=" + name + ", taxId=" + taxId + ", address=" + address + ", contacts="
-				+ contacts + ", jobs=" + jobs + "]";
+				+ contacts + ", jobs=" + jobs + ", mapContactSource=" + mapContactSource + "]";
 	}
 
 	public static Person getPerson(int id, String name, List<String> contacts){

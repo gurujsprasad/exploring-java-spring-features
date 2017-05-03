@@ -6,9 +6,11 @@
 	default-destroy-method="destroy">
 
 
-	<bean id="person" class="com.spring.application.springapplication.Person"
-		scope="singleton" init-method="initMethod" destroy-method="destroyMethod"
-		factory-method="getPerson" lazy-init="default">
+	<bean id="person"
+		class="com.spring.application.springapplication.Person"
+		scope="singleton" init-method="initMethod"
+		destroy-method="destroyMethod" factory-method="getPerson"
+		lazy-init="default">
 		
 		<!--  DI using constructor -->
 		<constructor-arg value="999" name="id" type="int"></constructor-arg>
@@ -46,6 +48,14 @@
 				</bean>
 
 			</list>
+		</property>
+		<!--  maps as property, will not add values with duplicate key -->
+		<property name="mapContactSource">
+			<props>
+				<prop key="home">3236211872</prop>
+				<prop key="cell">3236211872</prop>
+				<prop key="home">3236211872</prop>
+			</props>
 		</property>
 	</bean>
 
