@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+	default-merge="false" default-init-method="init"
+	default-destroy-method="destroy">
+
+
+	<bean id="person" class="com.spring.application.springapplication.Person"
+		scope="singleton" init-method="initMethod" destroy-method="destroyMethod"
+		factory-method="getPerson" lazy-init="default">
+		
+		<!--  DI using constructor -->
+		<constructor-arg value="999" name="id" type="int"></constructor-arg>
+		<constructor-arg value="guru" name="name" type="String"></constructor-arg>
+		
+		<!--  dependency injection through set method -->
+		<property name="taxId" value="99"></property>
+		
+		<!--  DI of another bean -->
+		<property name="address" ref="address"></property>
+		
+		<!-- List as a constructor argument -->
+		<constructor-arg name="contacts">
+			<list>
+				<value>100</value>
+				<value>101</value>
+				<value>102</value>
+				<value>103</value>
+			</list>
+		</constructor-arg>
+		
+		<!-- list of beans as properties -->
+		<property name="jobs">
+			<list>
+				<ref bean="exp1" />
+				<ref bean="exp2" />
+				
+				<!-- inner bean, this cannot be used outside of this property list scope -->
+				<bean 
+					class="com.spring.application.springapplication.JobExperience">
+					<constructor-arg name="id" type="int" value="3"></constructor-arg>
+					<constructor-arg name="companyName" type="String"
+						value="Unknown"></constructor-arg>
+					<property name="duration" value="36"></property>
+				</bean>
+
+			</list>
+		</property>
+	</bean>
+
+	<bean id="address" class="com.spring.application.springapplication.Address">
+		<constructor-arg name="id" value="1" type="int"></constructor-arg>
+		<constructor-arg name="address1" type="String" value="3839 baldwin"></constructor-arg>
+		<constructor-arg name="city" type="String" value="El Monte"></constructor-arg>
+		<constructor-arg name="country" type="String" value="USA"></constructor-arg>
+	</bean>
+
+	<bean id="exp1" class="com.spring.application.springapplication.JobExperience">
+		<constructor-arg name="id" type="int" value="1"></constructor-arg>
+		<constructor-arg name="companyName" type="String"
+			value="TCS"></constructor-arg>
+		<property name="duration" value="12"></property>
+	</bean>
+
+	<bean id="exp2" class="com.spring.application.springapplication.JobExperience">
+		<constructor-arg name="id" type="int" value="2"></constructor-arg>
+		<constructor-arg name="companyName" type="String"
+			value="SMTPL"></constructor-arg>
+		<property name="duration" value="5"></property>
+	</bean>
+</beans>
